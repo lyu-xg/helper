@@ -7,8 +7,11 @@ def split(lst, mth_fee=monthly_fee, i=0):
     each = mth_fee/len(lst)
     return [n+each for n in lst]
 
+def validate_mth(mth):
+    return mth if mth <= 12 else mth%12
+
 def print_fee(fees, mth_no):
-    m = '{}月'.format(mth_no) if type(mth_no) is int else mth_no
+    m = '{}月10日至{}月10日'.format(validate_mth(mth_no), validate_mth(mth_no+1)) if type(mth_no) is int else mth_no
     print('{}话费如下：'.format(m))
     for i, name in enumerate(names):
         if name not in no_show:
@@ -34,5 +37,7 @@ def one_mth(fees, mth):
 	main([fees,], mth)
 
 if __name__ == '__main__':
-    main([[110.74, 66.4, 25.74, 56.40, 75.50, 25.74, 25.74, 37.73],
-        [110.74, 66.4, 25.74, 25.74, 349.18, 25.74, 25.74, 37.73]],6)
+
+    #   ['XueGuang', 'Xu', 'QiuYuan', 'MingNa', 'YuZhao', 'TianYi', 'TianXiao', 'QianHan']
+    main([[110.88 + 14.57, 66.54, 25.88, 25.88, 25.88, 25.88, 25.88, 37.87],
+          [110.95 + 14.61, 66.61, 25.95, 25.95, 165.65, 25.95, 25.95, 173.27]],11)
